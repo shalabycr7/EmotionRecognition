@@ -1,10 +1,9 @@
 import importlib
 import os
 import sys
-from tkinter import messagebox, Listbox, filedialog
+from tkinter import filedialog
 
 import ttkbootstrap as ttk
-from ttkbootstrap.tooltip import ToolTip
 
 from EmotionRecognition import DATADIR
 from PIL import Image, ImageTk
@@ -36,40 +35,12 @@ class MainApp(ttk.Frame):
 
         # Store the app icons
         self.images = {}
-        icon_names = ['import-file', 'import-file-dark', 'theme-toggle', 'theme-toggle-dark', ]
+        icon_names = ['import-file', 'import-file-dark', ]
         for name in icon_names:
             self.images[name] = ttk.PhotoImage(name=name, file=resource_path(f'{name}-icon.png'))
         # Create and pack widgets
         self.pack(fill='both', expand=True)
         self.create_main_gui()
-        self.set_theme()
-
-    def set_theme(self):
-        # Toggle dark mode state
-        self.dark_mode_state = not self.dark_mode_state
-
-        # Get current images for buttons
-        toggle_img_key = 'theme-toggle' if self.dark_mode_state else 'theme-toggle-dark'
-        import_img_key = 'import-file-dark' if self.dark_mode_state else 'import-file'
-
-        current_images = {
-            'toggle': self.images[toggle_img_key],
-            'import': self.images[import_img_key],
-
-        }
-
-        # Configure style object
-        theme_name = 'cyborg' if self.dark_mode_state else 'cosmo'
-        self.current_style.theme_use(theme_name)
-
-        # Configure button images
-        self.theme_btn.configure(image=current_images['toggle'])
-        self.import_btn.configure(image=current_images['import'])
-
-        # Configure font
-        font_config = "-family PlusJakartaSans -size 9"
-        label_font_config = {'font': font_config}
-        self.current_style.configure('TLabel', **label_font_config)
 
     def create_main_gui(self):
         self.create_header()
@@ -79,8 +50,8 @@ class MainApp(ttk.Frame):
         container.pack(fill="both", expand=True)
 
         # Create grid and tools frames
-        original_image_frame = ttk.Frame(container, padding=5,)
-        detection_frame = ttk.Frame(container, padding=5,)
+        original_image_frame = ttk.Frame(container, padding=5, )
+        detection_frame = ttk.Frame(container, padding=5, )
 
         # Place the frames in the grid, spanning 3 rows each
         original_image_frame.grid(row=0, column=0, sticky="nsew")
@@ -101,12 +72,10 @@ class MainApp(ttk.Frame):
         # Create header
         header_frame = ttk.Frame(self, padding=(5, 2))
         header_frame.pack(fill='x', )
-
         ttk.Label(header_frame, text='Emotion Recognition', font="-family Barlow -size 13").pack(side='left')
 
         # Create import button
         import_image = self.images['import-file']
-        theme_image = self.images['theme-toggle']
 
         self.import_btn = ttk.Button(
             master=header_frame,
@@ -116,15 +85,6 @@ class MainApp(ttk.Frame):
             command=self.open_file
         )
         self.import_btn.pack(side='right')
-
-        # Create theme toggle button
-        self.theme_btn = ttk.Button(
-            master=header_frame,
-            image=theme_image,
-            style="link.TButton",
-            command=self.set_theme
-        )
-        self.theme_btn.pack(side='right', padx=10)
 
         ttk.Separator(header_frame, orient='vertical').pack(side='right', padx=20)
 
