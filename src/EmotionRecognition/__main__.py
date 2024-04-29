@@ -6,6 +6,8 @@ from tkinter import filedialog
 import ttkbootstrap as ttk
 
 from EmotionRecognition import DATADIR
+from EmotionRecognition import DATADIR2
+
 from PIL import Image, ImageTk
 
 from tensorflow.keras.models import model_from_json
@@ -23,7 +25,15 @@ def resource_path(relative_path):
         base_path = DATADIR
 
     return os.path.join(base_path, relative_path)
+def resource_path2(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    if getattr(sys, 'frozen', False):
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    else:
+        base_path = DATADIR2
 
+    return os.path.join(base_path, relative_path)
 
 class MainApp(ttk.Frame):
     def __init__(self, master, **kwargs):
@@ -107,9 +117,9 @@ class MainApp(ttk.Frame):
     # The process_image function integrates with the Tkinter app
     def process_image(self, file_path):
         # Load the model and Haar cascade file
-        model = model_from_json(open("model/model.json", "r").read())
-        model.load_weights('model/model.h5')
-        face_haar_cascade = cv2.CascadeClassifier('model/haarcascade_frontalface_default.xml')
+        model = model_from_json(open(resource_path2('model.json'), "r").read())
+        model.load_weights(resource_path2('model.h5'))
+        face_haar_cascade = cv2.CascadeClassifier(resource_path2('haarcascade_frontalface_default.xml'))
 
         # Load the image
         image = cv2.imread(file_path)
