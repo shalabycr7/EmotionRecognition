@@ -30,6 +30,7 @@ dependencies = [
     'pillow~=10.3.0',
     'keras~=3.3.3',
     'setuptools~=69.5.1',
+    'tensorflow~=2.16.1'
 ]
 
 [project.urls]
