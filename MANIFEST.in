@@ -1,1 +1,2 @@
 include src/EmotionRecognition/icons/*
+include src/EmotionRecognition/model/*

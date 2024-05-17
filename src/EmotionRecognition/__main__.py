@@ -4,15 +4,17 @@ import sys
 from tkinter import filedialog
 
 import ttkbootstrap as ttk
+from keras.src.models.model import model_from_json
+from keras.src.utils import img_to_array
 
 from EmotionRecognition import DATADIR
 from EmotionRecognition import DATADIR2
 
 from PIL import Image, ImageTk
 
-from tensorflow.keras.models import model_from_json
+# from tensorflow.keras.models import model_from_json
 import cv2
-from keras.preprocessing.image import img_to_array
+# from keras.preprocessing.image import img_to_array
 import numpy as np
 
 
@@ -25,6 +27,8 @@ def resource_path(relative_path):
         base_path = DATADIR
 
     return os.path.join(base_path, relative_path)
+
+
 def resource_path2(relative_path):
     """ Get absolute path to resource, works for dev and for PyInstaller """
     if getattr(sys, 'frozen', False):
@@ -34,6 +38,7 @@ def resource_path2(relative_path):
         base_path = DATADIR2
 
     return os.path.join(base_path, relative_path)
+
 
 class MainApp(ttk.Frame):
     def __init__(self, master, **kwargs):

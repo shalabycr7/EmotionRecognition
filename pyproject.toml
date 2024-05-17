@@ -8,7 +8,7 @@ dynamic = ["version"]
 description = "application"
 readme = "README.md"
 requires-python = ">=3.8"
-keywords = ['tkinter', 'app', 'GUI',]
+keywords = ['tkinter', 'app', 'GUI', ]
 authors = [
     { name = "shalabycr7", email = "abdoshalaby.dev@gmail.com" },
 ]
@@ -24,8 +24,12 @@ classifiers = [
     "Programming Language :: Python :: Implementation :: PyPy",
 ]
 dependencies = [
-    "ttkbootstrap~=1.10.1",
-
+    'ttkbootstrap~=1.10.1',
+    'opencv-python~=4.9.0.80',
+    'numpy~=1.26.4',
+    'pillow~=10.3.0',
+    'keras~=3.3.3',
+    'setuptools~=69.5.1',
 ]
 
 [project.urls]
