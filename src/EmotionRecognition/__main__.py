@@ -12,9 +12,7 @@ from EmotionRecognition import DATADIR2
 
 from PIL import Image, ImageTk
 
-# from tensorflow.keras.models import model_from_json
 import cv2
-# from keras.preprocessing.image import img_to_array
 import numpy as np
 
 

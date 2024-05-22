@@ -1,5 +1,6 @@
 # pycahrm files
 .idea
+src/EmotionRecognition/fer2013.csv
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
